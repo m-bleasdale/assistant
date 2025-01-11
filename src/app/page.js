@@ -1,10 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import MessageInput from "@/components/Input/MessageInput";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <MessageInput />
         <Image
           className={styles.logo}
           src="/next.svg"
