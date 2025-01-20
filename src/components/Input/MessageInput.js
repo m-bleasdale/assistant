@@ -3,48 +3,47 @@
 import { React, useState } from 'react';
 import axios from 'axios';
 
-import env from '@/env';
+import styles from './Input.module.css';
 
 function MessageInput () {
     const [UserInput, SetUserInput] = useState('');
 
     function handleSubmit () {
-        axios.post('https://api.sambanova.ai/v1/chat/completions', {
-            headers: {
-                "Authorization": `Bearer ${env.ARLI_API_KEY}`,
-                "Content-Type": "application/json"
-            },
-            body: {
-                "stream": true,
-                "model": "Meta-Llama-3.1-8B-Instruct",
-                "messages": [
-                    {"role": "system", "content": `${env.SYSTEM_PROMPT} \n <events>{[]}</events>`},
-                    {"role": "user", "content": `${UserInput} \n <events>{[]}</events>`}
-                ]
-            }
+        axios.post('https://assistant-backend-taupe.vercel.app/api/message/send', {
+            input: UserInput
         }).then((response) => {
             console.log(response);
         }).catch((e) => console.error(e));
     }
-    
-    function handleChange (e) {
-        const value = e.target.value;
-        SetUserInput(value);
+
+    /* Components */
+    function SubmitButton () {
+        return (
+            <div className={styles.MessageSubmit} onClick={handleSubmit}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                </svg>
+            </div>
+        )
     }
-    
+
     return (
-        <div className='MessageInput'>
-            <label className='MessageInputContainer'>
-                <input
-                    className='Input'
-                    type='text'
-                    name='message'
-                    placeholder='message'
-                    value={UserInput}
-                    onChange={handleChange}
-                />
-            </label>
-            <button className="MessageSubmit" onClick={handleSubmit}>Send</button>
+        <div className={styles.MessageInput}>
+            <div className={styles.Container}>
+                <label className={styles.MessageInputContainer}>
+                    <textarea
+                        className={styles.Input}
+                        type='text'
+                        name='message'
+                        placeholder='Message your assistant'
+                        value={UserInput}
+                        onChange={(e) => SetUserInput(e.target.value)}
+                    />
+                </label>
+                <div className={styles.Buttons}>
+                    <SubmitButton />
+                </div>
+            </div>
         </div>
     )
 

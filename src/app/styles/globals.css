@@ -1,14 +1,22 @@
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #101010;
+
+  --background-accent: #f9f9f9;
+  --background-dark: #ebebeb;
+
+  --border-colour: #e0e0e0;
+  --border-default: 1px solid var(--border-colour);
 }
 
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+*/
 
 html,
 body {
@@ -35,8 +43,10 @@ a {
   text-decoration: none;
 }
 
+/*
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
+*/
