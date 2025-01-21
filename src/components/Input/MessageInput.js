@@ -1,19 +1,18 @@
 'use client';
 
 import { React, useState } from 'react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 import styles from './Input.module.css';
+import { sendMessage } from '@/lib/features/chat/chatSlice';
 
 function MessageInput () {
+    const dispatch = useDispatch();
+    
     const [UserInput, SetUserInput] = useState('');
 
     function handleSubmit () {
-        axios.post('https://assistant-backend-taupe.vercel.app/api/message/send', {
-            input: UserInput
-        }).then((response) => {
-            console.log(response);
-        }).catch((e) => console.error(e));
+        dispatch(sendMessage(UserInput));
     }
 
     /* Components */
