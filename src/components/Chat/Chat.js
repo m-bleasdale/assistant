@@ -12,7 +12,10 @@ function Chat () {
 
     return (
         <div className={styles.ChatContainer}>
-            {messages}
+            {messages.map((message) =>                 
+                <p>{message.content}</p>
+            )
+            }
         </div>
     )
 }
