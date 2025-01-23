@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 //Send message to backend
-export const sendMessage = createAsyncThunk('chat/sendMessage', async (message) => {
-    const response = await axios.post('http://localhost:3001/api/message/send', {input: message}); //https://assistant-backend-taupe.vercel.app/api/message/send
-    return { userMessage: message, assistantResponse: response.data };
+export const sendMessage = createAsyncThunk('chat/sendMessage', async (params) => {
+    const response = await axios.post('http://localhost:3001/api/message/send', {input: params.message, previousMessages: params.previousMessages}); //https://assistant-backend-taupe.vercel.app/api/message/send
+    return { userMessage: params.message, assistantResponse: response.data };
 })
 
 const chatSlice = createSlice({

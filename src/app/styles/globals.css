@@ -1,9 +1,9 @@
 :root {
-  --background: #ffffff;
+  --background: #f9f9f9;
   --foreground: #101010;
 
-  --background-accent: #f9f9f9;
-  --background-dark: #ebebeb;
+  --background-accent: #ffffff;
+  --background-dark: #f0f0f0;
 
   --border-colour: #e0e0e0;
   --border-default: 1px solid var(--border-colour);

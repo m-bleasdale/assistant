@@ -1,18 +1,19 @@
 'use client';
 
 import { React, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Input.module.css';
 import { sendMessage } from '@/lib/features/chat/chatSlice';
 
 function MessageInput () {
     const dispatch = useDispatch();
+    const { messages } = useSelector((state) => state.chat);
     
     const [UserInput, SetUserInput] = useState('');
 
     function handleSubmit () {
-        dispatch(sendMessage(UserInput));
+        dispatch(sendMessage({message: UserInput, previousMessages: messages}));
     }
 
     /* Components */

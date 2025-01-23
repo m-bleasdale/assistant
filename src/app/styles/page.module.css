@@ -35,15 +35,15 @@
   /* Sidebars */
 
   .sidebar {
-    background-color: var(--background-accent);
+    background-color: var(--background-dark);
   }
 
   .sidebar#left {
-    border-right: var(--border-default);
+    border-right: none;
   }
 
   .sidebar#right {
-    border-left: var(--border-default);
+    border-left: none;
   }
   
   /* Links */
