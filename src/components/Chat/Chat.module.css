@@ -1,0 +1,51 @@
+.ChatContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    height: calc(100vh - (135px));
+    overflow-y: scroll;
+    padding-bottom: 25px;
+}
+
+.MessageContainer {
+    margin-left: 200px;
+    margin-right: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.MessageContainer#assistant {
+    display: flex;
+    align-self: center;
+}
+
+.MessageContainer#assistant .Message {
+    text-align: left;
+    width: 800px;
+}
+
+.MessageContainer#user {
+    display: flex;
+    align-self: flex-end;
+}
+
+.MessageContainer#user .Message {
+    text-align: left;
+    min-width: 30px;
+    max-width: 550px;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    border: none;
+    border-radius: 20px;
+    background-color: var(--primary);
+    color: var(--alt-text);
+
+    box-shadow: 0 10px 15px -3px #0000001a;
+    -webkit-box-shadow: 0 10px 15px -3px #0000001a;
+    -moz-box-shadow: 0 10px 15px -3px #0000001a;
+}

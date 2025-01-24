@@ -32,20 +32,6 @@
     grid-template-rows: 1fr 135px;
   }
   
-  /* Sidebars */
-
-  .sidebar {
-    background-color: var(--background-dark);
-  }
-
-  .sidebar#left {
-    border-right: none;
-  }
-
-  .sidebar#right {
-    border-left: none;
-  }
-  
   /* Links */
   
   .ctas {

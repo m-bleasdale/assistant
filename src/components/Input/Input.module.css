@@ -22,12 +22,12 @@
 
 .MessageInputContainer .Input {
     resize: none;
-    width: 650px;
+    width: 750px;
     height: 110px;
 
-    padding: 10px;
+    padding: 15px;
     font-family: Arial;
-    font-size: 15px;
+    font-size: 16px;
 
     border: none;
     background: inherit;
@@ -47,18 +47,30 @@
     flex-direction: column;
     justify-content: center;
     padding-right: 10px;
+    padding-left: 10px;
 }
 
 .MessageSubmit {
     height: 35px;
     width: 35px;
     border-radius: 100%;
-    background: var(--foreground);
-    color: var(--background);
+    background: var(--primary);
+    color: var(--alt-text);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.MessageSubmit#idle .MessageSubmit#succeeded .MessageSubmit#failed {
+    background: var(--primary);
+    color: var(--alt-text);
+}
+
+
+.MessageSubmit#loading {
+    background: var(--primary-faded);
+    color: var(--alt-text);
 }
 
 .MessageSubmit svg {

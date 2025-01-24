@@ -1,0 +1,13 @@
+/* Sidebars */
+
+.Sidebar {
+    background-color: var(--background-dark);
+}
+
+.Sidebar#left {
+    border-right: none;
+}
+
+.Sidebar#right {
+    border-left: none;
+}
