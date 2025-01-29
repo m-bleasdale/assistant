@@ -3,7 +3,18 @@ import axios from 'axios';
 
 //Send message to backend
 export const sendMessage = createAsyncThunk('chat/sendMessage', async (params) => {
-    const response = await axios.post('https://assistant-backend-taupe.vercel.app/api/message/send', {input: params.message, previousMessages: params.previousMessages});
+    const response = await axios.post('https://assistant-backend-taupe.vercel.app/api/message/send', 
+        {
+            input: params.message, 
+            previousMessages: params.previousMessages, 
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${params.user.sub}`
+            }
+        }
+    
+    );
     return { userMessage: params.message, assistantResponse: response.data };
 })
 

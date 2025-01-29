@@ -3,12 +3,16 @@
 import { React, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useUser } from '@auth0/nextjs-auth0/client';
+
 import styles from './Input.module.css';
 import { sendMessage } from '@/lib/features/chat/chatSlice';
 
 function MessageInput () {
     const dispatch = useDispatch();
     const { messages, status } = useSelector((state) => state.chat);
+
+    const { user, error, isLoading } = useUser();
     
     const [UserInput, SetUserInput] = useState('');
 
@@ -16,7 +20,7 @@ function MessageInput () {
         
         if(status !== 'loading' && UserInput !== '')
         {
-            dispatch(sendMessage({message: UserInput, previousMessages: messages}));
+            dispatch(sendMessage({message: UserInput, previousMessages: messages, user: user}));
             SetUserInput('');
         }
         
