@@ -8,10 +8,80 @@
 }
 
 .MessageContainer {
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 320px;
+    margin-right: 320px;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.MessageContent p{
+    margin-bottom: 20px;
+    line-height: 20px;
+}
+
+.MessageContainer h1{
+    margin-bottom: 20px;
+    line-height: 20px;
+}
+
+.MessageContainer h2{
+    margin-bottom: 20px;
+    line-height: 20px;
+}
+
+.MessageContent a{
+    color: var(--primary);
+}
+
+.MessageContainer ol {
+    padding-left: 45px;
+}
+
+.MessageContainer ul {
+    padding-left: 45px;
+}
+
+.MessageContent li{
+    margin-bottom: 20px;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+.MessageContent code{
+    line-height: 20px;
+    font-size: 16px;
+    background-color: var(--darker);
+    border-radius: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-wrap: wrap;
+}
+
+.MessageContent pre{
+    background-color: var(--darker);
+    border-radius: 5px;
+    padding: 10px;
+    text-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.MessageContainer table {
+    margin-bottom: 20px;
+    border-collapse: collapse; 
+    width: 100%;
+}
+
+.MessageContainer table th{
+    padding: 5px;
+    background-color: var(--darker);
+    border: 1px solid var(--foreground-faded-more);
+
+}
+
+.MessageContainer table td{
+    padding: 5px;
+    background-color: var(--background-dark);
+    border: 1px solid var(--foreground-faded-more);
 }
 
 .MessageContainer#assistant {

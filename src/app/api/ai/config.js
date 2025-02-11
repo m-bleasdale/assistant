@@ -22,7 +22,6 @@ const prompt = [
         * flag: one of the users custom flags which allow them to sort events. If no flags are given, or the event does not fit a flag, set to "none"
     `},
     {text: `We are in the UK. Use British English and expect DD-MM-YYYY format`},
-    {text: `If you want to create a paragraph break in your reply. Use <br>`},
     {text: `
         Most, but not all, users will be students using you to plan revision time. They may be in school throughout the day and this may not be on their timetable. They may not have lessons for the entire time.
 
