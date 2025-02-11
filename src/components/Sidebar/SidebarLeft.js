@@ -8,10 +8,11 @@ import styles from './Sidebar.module.css';
 
 function SidebarLeft () {
     const { user, error, isLoading } = useUser();
+	if(!user && !isLoading) window.location.href = "/api/auth/login"; //redirect to login
 
     function Title () {
         if (isLoading) return "Loading...";
-        if (error) return "error.message";
+        if (error) return error.message;
         
         if (user) return user.name;
     }

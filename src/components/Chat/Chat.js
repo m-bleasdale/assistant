@@ -13,7 +13,7 @@ function Chat () {
     return (
         <div className={styles.ChatContainer}>
             {messages.map((message, index) =>                 
-                <Message key={index} role={message.role}>{message.content}</Message>
+                <Message key={index} role={message.role}>{message.parts[0].text}</Message>
             )
             }
         </div>

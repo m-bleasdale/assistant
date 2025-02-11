@@ -3,20 +3,31 @@ import axios from 'axios';
 
 //Send message to backend
 export const sendMessage = createAsyncThunk('chat/sendMessage', async (params) => {
-    const response = await axios.post('https://assistant-backend-taupe.vercel.app/api/message/send', 
-        {
-            input: params.message, 
-            previousMessages: params.previousMessages, 
-        },
-        {
-            headers: {
-                Authorization: `Bearer ${params.user.sub}`
+    try {
+        const response = await axios.post("/api/ai", 
+            {
+                message: params.message,
+                previousMessages: params.previousMessages, 
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${params.user.sub}`
+                }
             }
-        }
+        );
+        
+        return { 
+            userMessage: params.message, 
+            assistantResponse: response.data.text
+        };
+
+    } catch (error) {
+        console.error(error);
+        throw error;
+        
+    }
     
-    );
-    return { userMessage: params.message, assistantResponse: response.data };
-})
+});
 
 const chatSlice = createSlice({
     name: 'chat',
@@ -33,8 +44,8 @@ const chatSlice = createSlice({
             })
             .addCase(sendMessage.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.messages.push({ role: 'user', content: action.payload.userMessage });
-                state.messages.push({ role: 'assistant', content: action.payload.assistantResponse });
+                state.messages.push({ role: 'user', parts: [{ text: action.payload.userMessage }] });
+                state.messages.push({ role: 'model', parts: [{ text: action.payload.assistantResponse }] });
             })
             .addCase(sendMessage.rejected, (state, action) => {
                 state.status = 'failed';
