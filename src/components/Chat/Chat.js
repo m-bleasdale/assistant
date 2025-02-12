@@ -10,10 +10,15 @@ import Message from './Message';
 function Chat () {
     const { messages, status, error } = useSelector((state) => state.chat);
 
+    function RemoveActionTags(text) {
+        const ActionsRegex = /<Actions>(.*?)<\/Actions>/s;
+        return text.replace(ActionsRegex, '').trim();
+    }
+
     return (
         <div className={styles.ChatContainer}>
             {messages.map((message, index) =>                 
-                <Message key={index} role={message.role}>{message.parts[0].text}</Message>
+                <Message key={index} role={message.role}>{RemoveActionTags(message.parts[0].text)}</Message>
             )
             }
         </div>

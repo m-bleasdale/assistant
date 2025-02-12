@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 import { prompt } from "./config";
+import Reply from "./Reply";
 
 const genAI= new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel(
@@ -28,7 +29,6 @@ export async function POST(req) {
     if (req.method !== "POST") return NextResponse.json({ error: "Must be POST" }, { status: 405 });
 
     const { message, previousMessages } = await req.json();
-    console.log(previousMessages);
 
     try {
         const chat = model.startChat({
@@ -38,9 +38,13 @@ export async function POST(req) {
             generationConfig: generationConfig
         });
 
-        let reply = await chat.sendMessage(message);
-        const replyText = reply.response.candidates[0].content.parts[0].text;
-        return NextResponse.json({text: replyText});
+        const userMessage = `${message} <MessageDate>${new Date()}</MessageDate>`;
+
+        let response = await chat.sendMessage(userMessage);
+        let reply = new Reply(response.response.candidates[0].content.parts[0].text);
+        if(reply.status !== "success") return NextResponse.json({ error: "Error parsing assistant response", error_message: reply.error }, { status: 500 });
+
+        return NextResponse.json({text: reply.text, actions: reply.actions});
         
     }
     catch (error){

@@ -26,20 +26,9 @@ function MessageInput () {
         
     }
 
-    /* Components */
-    function SubmitButton () {
-        return (
-            <div className={styles.MessageSubmit} id={styles[status]} onClick={handleSubmit}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="size-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
-                </svg>
-            </div>
-        )
-    }
-
     return (
         <div className={styles.MessageInput}>
-            <div className={styles.Container}>
+            <form className={styles.Container}>
                 <label className={styles.MessageInputContainer}>
                     <textarea
                         className={styles.Input}
@@ -48,12 +37,22 @@ function MessageInput () {
                         placeholder='Message your assistant'
                         value={UserInput}
                         onChange={(e) => SetUserInput(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
+                                handleSubmit();
+                            }
+                        }}                    
                     />
                 </label>
                 <div className={styles.Buttons}>
-                    <SubmitButton />
+                    <div className={styles.MessageSubmit} id={styles[status]} onClick={handleSubmit}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                        </svg>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     )
 
