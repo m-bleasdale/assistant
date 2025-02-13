@@ -12,9 +12,16 @@
   --background-accent: #ffffff;
   --background-dark: #f0f0f0;
   --darker: #e6e6e6;
-
+ 
   --border-colour: #e0e0e0;
   --border-default: 1px solid var(--border-colour);
+
+  --error-dark: #8f0d0d;
+  --error-light: #b75353;
+
+  --calendar-blue: #597ef7;
+  --calendar-green: #2E8B57;
+  --calendar-red: #c56f55;
 }
 
 /*

@@ -1,0 +1,28 @@
+.ActionList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px;
+}
+
+.Action {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.Action#add {
+    background-color: var(--calendar-blue);
+}
+.Action#modify {
+    background-color: var(--calendar-green);
+}
+.Action#remove {
+    background-color: var(--calendar-red);
+}
+
+.ActionTimes {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+

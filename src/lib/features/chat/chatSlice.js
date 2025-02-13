@@ -15,18 +15,16 @@ export const sendMessage = createAsyncThunk('chat/sendMessage', async (params) =
                 }
             }
         );
-
-        console.log(response.data.actions);
         
         return { 
             userMessage: params.message, 
-            assistantResponse: response.data.text
+            assistantResponse: response.data.text,
+            actions: response.data.actions
         };
 
     } catch (error) {
         console.error(error);
-        throw error;
-        
+        return rejectWithValue(error.response.data);
     }
     
 });
@@ -35,6 +33,7 @@ const chatSlice = createSlice({
     name: 'chat',
     initialState: {
         messages: [],
+        actions: [],
         status: 'idle',
         error: null
     },
@@ -48,6 +47,7 @@ const chatSlice = createSlice({
                 state.status = 'succeeded';
                 state.messages.push({ role: 'user', parts: [{ text: action.payload.userMessage }] });
                 state.messages.push({ role: 'model', parts: [{ text: action.payload.assistantResponse }] });
+                state.actions.push(action.payload.actions);
             })
             .addCase(sendMessage.rejected, (state, action) => {
                 state.status = 'failed';
