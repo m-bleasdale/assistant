@@ -10,8 +10,9 @@ import styles from './Action.module.css';
 function ActionList () {
     const { actions, status, error } = useSelector((state) => state.chat);
 
+    if (actions.length === 0) return;
+
     function InterpretActions(actions) {
-        if (!actions) return;
         console.log(actions);
         const ActionSequences = actions.filter(action => action.length !== 0);
         

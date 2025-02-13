@@ -4,8 +4,6 @@ import { React, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
-import 'ldrs/dotPulse';
-
 import styles from './Chat.module.css';
 
 import Message from './Message';
@@ -16,6 +14,11 @@ function Chat () {
     const chatRef = useRef(null);
 
     useEffect(() => {
+        import("ldrs/dotPulse");
+    }, []);
+
+    useEffect(() => {
+        import("ldrs/dotPulse");
         if (chatRef.current) {
             chatRef.current.scrollTop = chatRef.current.scrollHeight;
         }
