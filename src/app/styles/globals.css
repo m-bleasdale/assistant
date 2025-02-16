@@ -63,11 +63,12 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--darker);
+  background: var(--primary);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: none;
+  background: var(--darker);
 }
 
 

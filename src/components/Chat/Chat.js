@@ -18,7 +18,6 @@ function Chat () {
     }, []);
 
     useEffect(() => {
-        import("ldrs/dotPulse");
         if (chatRef.current) {
             chatRef.current.scrollTop = chatRef.current.scrollHeight;
         }
