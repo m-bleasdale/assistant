@@ -1,6 +1,8 @@
 'use client';
 import { useSession } from 'next-auth/react';
 
+import { Suspense } from 'react';
+
 import styles from "./styles/page.module.css";
 
 import MessageInput from "@/components/Input/MessageInput";
@@ -11,22 +13,20 @@ import LoadingPage from '@/components/LoadingPage/LoadingPage';
 import Login from '@/components/Login/Login';
 
 export default function Home() {
-	const { data: session } = useSession();
-	if(!session) return <Login />
-
-	/*if(isLoading) return (
-		<LoadingPage />
-	)*/
+	const { data: session, status } = useSession();
+	if(status === "loading") return <LoadingPage />
+	if(!session || status === "unauthenticated") return <Login />
 	
 	return (
-		<div className={styles.page}>
-			<SidebarLeft />
-			<div className={styles.main}>
-				<Chat />
-				<MessageInput />
+		<Suspense fallback={<LoadingPage />}>
+			<div className={styles.page}>
+				<SidebarLeft />
+				<div className={styles.main}>
+					<Chat />
+					<MessageInput />
+				</div>
+				<SidebarRight />
 			</div>
-			<SidebarRight />
-		</div>
-		
+		</Suspense>
 	);
 }
