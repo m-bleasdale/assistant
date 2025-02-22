@@ -2,6 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 import { prompt } from "./config";
 import Reply from "./Reply";
+import Action from "./Action";
 
 const genAI= new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel(
@@ -43,6 +44,16 @@ export async function POST(req) {
         let response = await chat.sendMessage(userMessage);
         let reply = new Reply(response.response.candidates[0].content.parts[0].text);
         if(reply.status !== "success") return NextResponse.json({ error: "Error parsing assistant response", error_message: reply.error }, { status: 500 });
+
+        console.log(reply.actions);
+
+        if(reply.actions !== null && reply.actions !== undefined)
+        {
+            reply.actions.forEach(actionElement => {
+                const action = new Action(actionElement);
+                console.log(actionElement);
+            });
+        }
 
         return NextResponse.json({text: reply.text, actions: reply.actions});
         

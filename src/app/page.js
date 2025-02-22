@@ -1,5 +1,5 @@
 'use client';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useSession } from 'next-auth/react';
 
 import styles from "./styles/page.module.css";
 
@@ -8,15 +8,15 @@ import Chat from "@/components/Chat/Chat";
 import SidebarLeft from "@/components/Sidebar/SidebarLeft";
 import SidebarRight from "@/components/Sidebar/SidebarRight";
 import LoadingPage from '@/components/LoadingPage/LoadingPage';
+import Login from '@/components/Login/Login';
 
 export default function Home() {
-    const { user, error, isLoading } = useUser();
-	if(!user && !isLoading) window.location.href = "/api/auth/login"; //redirect to login
-	if(error) console.error(error); 
+	const { data: session } = useSession();
+	if(!session) return <Login />
 
-	if(isLoading) return (
+	/*if(isLoading) return (
 		<LoadingPage />
-	)
+	)*/
 	
 	return (
 		<div className={styles.page}>

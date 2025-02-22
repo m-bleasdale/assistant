@@ -2,7 +2,7 @@
 
 import { React, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useSession } from 'next-auth/react';
 
 import styles from './Chat.module.css';
 
@@ -10,7 +10,7 @@ import Message from './Message';
 
 function Chat () {
     const { messages, status, error } = useSelector((state) => state.chat);
-    const { user, usererror, isLoading } = useUser();
+    const { data: session } = useSession();
     const chatRef = useRef(null);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ function Chat () {
         if (messages.length === 0 && status === "idle"){
 
             let name = "";
-            if(!isLoading) name = user.name;
+            if(session) name = session.user.name;
 
             return (
                 <div className={styles.NoMessagesContainer}>

@@ -8,16 +8,16 @@ import Action from './Action';
 import styles from './Action.module.css';
 
 function ActionList () {
-    const { actions, status, error } = useSelector((state) => state.chat);
     const listRef = useRef(null);
-
-    if (actions.length === 0) return;
+    const { actions, status, error } = useSelector((state) => state.chat);
 
     useEffect(() => {
         if (listRef.current) {
             listRef.current.scrollTop = listRef.current.scrollHeight;
         }
     }, [actions]);
+
+    if (actions.length === 0) return;
 
     function InterpretActions(actions) {
         const ActionSequences = actions.filter(action => action.length !== 0);

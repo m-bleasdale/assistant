@@ -1,6 +1,6 @@
 import "./styles/globals.css";
 import StoreProvider from "@/app/StoreProvider";
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import Session from "@/app/SessionProvider";
 
 export const metadata = {
   title: "Assistant",
@@ -9,13 +9,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+
       <StoreProvider>
         <html lang="en">
-          <UserProvider>
+          <Session>
             <body>
               {children}
             </body>
-          </UserProvider>
+          </Session>
         </html>
       </StoreProvider>
     
