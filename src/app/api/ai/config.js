@@ -32,6 +32,9 @@ const prompt = [
     {text: `
         A list of the events that are already on the user's calender will be displayed as a JSON array inside <Events></Events> tags. You should not add these tags to your message.
     `},
+    {text: `
+        A list of outstanding tasks (to do items) will also be displayed as a JSON array inside <Tasks></Tasks> tags. You should not add these tags to your message.
+    `},
     {text: `We are in the UK. Use British English and expect DD-MM-YYYY format`},
     {text: `
         Most, but not all, users will be students using you to plan revision time. They may be in school throughout the day and this may not be on their timetable. They may not have lessons for the entire time.

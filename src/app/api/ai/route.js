@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 import { prompt } from "./config";
 import Reply from "./Reply";
 import Action from "./Action";
-import {getEvents} from "./calendar";
+import {getEvents} from "./events";
+import {getTasks} from "./tasks";
 
 const genAI= new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel(
@@ -42,8 +43,9 @@ export async function POST(req) {
         });
 
         const events = await getEvents(userToken);
+        const tasks = await getTasks(userToken);
 
-        const userMessage = `${message} <Events>${JSON.stringify(events)}</Events> <MessageDate>${new Date()}</MessageDate>`;
+        const userMessage = `${message} <Tasks>${JSON.stringify(tasks)}</Tasks> <Events>${JSON.stringify(events)}</Events> <MessageDate>${new Date()}</MessageDate>`;
 
         let response = await chat.sendMessage(userMessage);
         let reply = new Reply(response.response.candidates[0].content.parts[0].text);
@@ -57,7 +59,7 @@ export async function POST(req) {
             });
         }
 
-        return NextResponse.json({text: reply.text, actions: reply.actions, events_test: events});
+        return NextResponse.json({text: reply.text, actions: reply.actions, events_test: tasks});
         
     }
     catch (error){
