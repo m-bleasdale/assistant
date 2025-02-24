@@ -13,10 +13,9 @@ function Action (action) {
         <div className={styles.Action} id={styles[action.action.type]}>
             <p>{GetActionType()}</p>
             <p>{action.action.content.name}</p>
-            <p>{action.action.content.date}</p>
             <div className={styles.ActionTimes}>
-                <p>{action.action.content.start_time}</p>
-                <p>{action.action.content.end_time}</p>
+                <p>{action.action.content.start_datetime}</p>
+                <p>{action.action.content.end_datetime}</p>
 
             </div>
 		</div>

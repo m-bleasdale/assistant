@@ -11,15 +11,17 @@ export const sendMessage = createAsyncThunk('chat/sendMessage', async (params) =
             },
             {
                 headers: {
-                    Authorization: `Bearer ${params.user.sub}`
+                    Authorization: `Bearer ${params.userToken}`
                 }
             }
         );
+
+        console.log(response.data.events_test)
         
         return { 
             userMessage: params.message, 
             assistantResponse: response.data.text,
-            actions: response.data.actions
+            actions: response.data.actions || []
         };
 
     } catch (error) {

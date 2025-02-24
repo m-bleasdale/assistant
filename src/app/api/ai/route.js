@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { prompt } from "./config";
 import Reply from "./Reply";
 import Action from "./Action";
+import {getEvents} from "./calendar";
 
 const genAI= new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel(
@@ -30,6 +31,7 @@ export async function POST(req) {
     if (req.method !== "POST") return NextResponse.json({ error: "Must be POST" }, { status: 405 });
 
     const { message, previousMessages } = await req.json();
+    const userToken = req.headers.get('authorization')?.split(' ')[1];
 
     try {
         const chat = model.startChat({
@@ -39,13 +41,13 @@ export async function POST(req) {
             generationConfig: generationConfig
         });
 
-        const userMessage = `${message} <MessageDate>${new Date()}</MessageDate>`;
+        const events = await getEvents(userToken);
+
+        const userMessage = `${message} <Events>${JSON.stringify(events)}</Events> <MessageDate>${new Date()}</MessageDate>`;
 
         let response = await chat.sendMessage(userMessage);
         let reply = new Reply(response.response.candidates[0].content.parts[0].text);
         if(reply.status !== "success") return NextResponse.json({ error: "Error parsing assistant response", error_message: reply.error }, { status: 500 });
-
-        console.log(reply.actions);
 
         if(reply.actions !== null && reply.actions !== undefined)
         {
@@ -55,7 +57,7 @@ export async function POST(req) {
             });
         }
 
-        return NextResponse.json({text: reply.text, actions: reply.actions});
+        return NextResponse.json({text: reply.text, actions: reply.actions, events_test: events});
         
     }
     catch (error){

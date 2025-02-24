@@ -9,7 +9,7 @@ import styles from './Action.module.css';
 
 function ActionList () {
     const listRef = useRef(null);
-    const { actions, status, error } = useSelector((state) => state.chat);
+    const { actions = [], status, error } = useSelector((state) => state.chat);
 
     useEffect(() => {
         if (listRef.current) {
@@ -20,8 +20,9 @@ function ActionList () {
     if (actions.length === 0) return;
 
     function InterpretActions(actions) {
-        const ActionSequences = actions.filter(action => action.length !== 0);
-        
+        const ActionSequences = actions.filter(action => action === null || action.length !== 0);
+        if (ActionSequences.length === 0) return [];
+
         let Actions = [];
 
         ActionSequences.forEach(sequence => {
