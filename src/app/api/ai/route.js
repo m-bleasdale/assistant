@@ -45,7 +45,7 @@ export async function POST(req) {
         const events = await getEvents(userToken);
         const tasks = await getTasks(userToken);
 
-        const userMessage = `${message} <Tasks>${JSON.stringify(tasks)}</Tasks> <Events>${JSON.stringify(events)}</Events> <MessageDate>${new Date()}</MessageDate>`;
+        const userMessage = `${message} <MessageDate>${new Date()}</MessageDate> <Tasks>${JSON.stringify(tasks)}</Tasks> <Events>${JSON.stringify(events)}</Events>`;
 
         let response = await chat.sendMessage(userMessage);
         let reply = new Reply(response.response.candidates[0].content.parts[0].text);
