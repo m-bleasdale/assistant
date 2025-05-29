@@ -15,16 +15,27 @@ class Action {
             if(this.type === 'modify') this.ModifyEvent();
             if(this.type === 'remove') this.RemoveEvent();
         }
+        else if(this.scope === "task"){
+            if(this.type === 'add') this.AddTask();
+            if(this.type === 'modify') this.ModifyTask();
+
+        }
     }
 
     async GetCalendar() {
         let calendarToReturn;
 
-        const calendars = await axios.get("https://www.googleapis.com/calendar/v3/users/me/calendarList",
-            {headers: {
-                'Authorization': `Bearer ${this.userToken}`
-            }}
-        );
+        let calendars;
+        try{
+            calendars = await axios.get("https://www.googleapis.com/calendar/v3/users/me/calendarList",
+                {headers: {
+                    'Authorization': `Bearer ${this.userToken}`
+                }}
+            );
+        }
+        catch (error){
+            console.error(`Error adding calendar:`, error.response?.data || error.message);
+        }
 
         let calendarExists = false;
         for (const calendar of calendars.data.items) {
@@ -151,10 +162,66 @@ class Action {
                 }
             }
             );
-
-            console.log(`Event ${eventId} successfully deleted.`);
         } catch (error) {
             console.error('Error deleting event:', error.response?.data || error.message);
+        }
+
+    }
+
+    async AddTask() {
+        try {
+            await axios.post(
+                `https://www.googleapis.com/tasks/v1/lists/@default/tasks`,
+                {
+                    title: this.content.name,
+                    notes: this.content.description,
+                    due: this.content.due
+                },
+                {
+                    headers: {
+                    Authorization: `Bearer ${this.userToken}`,
+                    'Content-Type': 'application/json'
+                    }
+                }
+            );
+
+        } catch (error) {
+            console.error('Error creating task:', error.response?.data || error.message);
+        }
+    }
+
+    async ModifyTask() {
+
+        const res = await axios.get('https://www.googleapis.com/tasks/v1/lists/@default/tasks', {
+            headers: {
+                Authorization: `Bearer ${this.userToken}`
+            }
+            });
+
+            console.log(res.data.items.map(t => t.id)); // See if your ID is there
+
+
+        try {
+            await axios.patch(
+            `https://www.googleapis.com/tasks/v1/lists/@default/tasks/${this.content.id}`,
+            {
+                title: this.content.name,
+                notes: this.content.description,
+                due: this.content.due,
+                status: this.content.status
+            },
+            {
+                headers: {
+                Authorization: `Bearer ${this.userToken}`,
+                'Content-Type': 'application/json'
+                }
+            }
+            );
+
+        } catch (error) {
+            console.error('Error updating task:', error.response?.data || error.message);
+            console.log(error.response.data.error.errors);
+            console.log(`https://www.googleapis.com/tasks/v1/lists/@default/tasks/${this.content.id}`)
         }
 
     }

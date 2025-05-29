@@ -55,7 +55,12 @@ export async function POST(req) {
         {
             reply.actions.forEach(actionElement => {
                 const action = new Action(actionElement, userToken);
-                action.ExecuteAction();
+                try{
+                    action.ExecuteAction();
+                }
+                catch{
+                    return NextResponse.json({ error: "Error adding event, likely because access token has expired", error_message: reply.error }, { status: 500 });
+                }
                 console.log(actionElement);
             });
         }

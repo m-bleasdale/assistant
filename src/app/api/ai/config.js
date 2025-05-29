@@ -20,19 +20,29 @@ const prompt = [
         * type: "add", "modify" or "remove"
         * content: JSON Object
         
-        The content object has the following schema:
+        The content object for an EVENT has the following schema:
 
-        * id: (if given) id of event/task to modify (if modifying)
-        * name: short name of the event/task
-        * description: additional information about the event/task (use only when needed)
+        * id: (if given) id of event to modify (if modifying/removing)
+        * name: short name of the event
+        * description: additional information about the event (use only when needed)
         * recurrence: Rule for how often event repeats (iCalendar format, RRULE)
         * all_day: true or false
         * start_datetime: ISO format with UK timezone offset, consider whether UTC or BST is used (if all day just give date as YYYY-MM-DD)
         * end_datetime: ISO format with UK timezone offset, consider whether UTC or BST is used (if all day just give date as YYYY-MM-DD)
         * flag: one of the users custom flags which allow them to sort events. If no flags are given, or the event does not fit a flag, set to "none"
+        
+        For a TASK the schema is:
+        * id: (if given) id of task to modify (if modifying)
+        * name: short name of the task
+        * description: additional information about the task (use only when needed)
+        * due: ISO format with UK timezone offset, consider whether UTC or BST is used (if all day give time as 00:00)
+        * status: 'needsAction' or 'completed'
+
     `},
     {text:`
-        When modifying an existing event, put values for all fields, even if those fields are not updated
+        When modifying an existing event, put values for all fields, even if those fields are not updated.
+
+        To mark a task as done set status to 'completed'. A task cannot be deleted, if they ask to delete it, mark it as completed.
     `},
     {text: `
         A list of the events that are already on the user's calender will be displayed as a JSON array inside <Events></Events> tags. You should not add these tags to your message.
