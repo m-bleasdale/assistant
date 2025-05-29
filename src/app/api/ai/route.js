@@ -54,7 +54,8 @@ export async function POST(req) {
         if(reply.actions !== null && reply.actions !== undefined)
         {
             reply.actions.forEach(actionElement => {
-                const action = new Action(actionElement);
+                const action = new Action(actionElement, userToken);
+                action.ExecuteAction();
                 console.log(actionElement);
             });
         }
