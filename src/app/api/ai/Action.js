@@ -96,7 +96,8 @@ class Action {
                     description: this.content.description ? this.content.description : null,
                     start: start,
                     end: end,
-                    recurrence: this.content.recurrence
+                    recurrence: this.content.recurrence,
+                    colorId: this.content.colorId
                 },
                 {
                     headers: {
@@ -134,7 +135,8 @@ class Action {
                     description: this.content.description ? this.content.description : null,
                     start: start,
                     end: end,
-                    recurrence: this.content.recurrence
+                    recurrence: this.content.recurrence,
+                    colorId: this.content.colorId
                 },
                 {
                     headers: {

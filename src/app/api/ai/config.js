@@ -29,15 +29,29 @@ const prompt = [
         * all_day: true or false
         * start_datetime: ISO format with UK timezone offset, consider whether UTC or BST is used (if all day just give date as YYYY-MM-DD)
         * end_datetime: ISO format with UK timezone offset, consider whether UTC or BST is used (if all day just give date as YYYY-MM-DD)
-        * flag: one of the users custom flags which allow them to sort events. If no flags are given, or the event does not fit a flag, set to "none"
+        * colorId: a number "1" - "11" for the event colour. Pick colours that are thematically similar to other events. Must be a string with numbers. Always add a colour. Choose 0 to be default
         
         For a TASK the schema is:
         * id: (if given) id of task to modify (if modifying)
         * name: short name of the task
         * description: additional information about the task (use only when needed)
-        * due: ISO format with UK timezone offset, consider whether UTC or BST is used (if all day give time as 00:00)
+        * due: ISO format with UK timezone offset, consider whether UTC or BST is used (if the due date has no time, set the time as 00:00 on the day it is due)
         * status: 'needsAction' or 'completed'
 
+    `},
+    {text: `
+        Colours available are:
+        Lavender: 1  
+        Sage: 2  
+        Grape: 3  
+        Flamingo: 4  
+        Banana: 5  
+        Tangerine: 6  
+        Peacock: 7  
+        Graphite: 8  
+        Blueberry: 9  
+        Basil: 10  
+        Tomato: 11
     `},
     {text:`
         When modifying an existing event, put values for all fields, even if those fields are not updated.
