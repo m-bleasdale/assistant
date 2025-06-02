@@ -84,12 +84,12 @@
     border: 1px solid var(--foreground-faded-more);
 }
 
-.MessageContainer#assistant {
+.MessageContainer#model {
     display: flex;
     align-self: center;
 }
 
-.MessageContainer#assistant .Message {
+.MessageContainer#model .Message {
     text-align: left;
     width: 800px;
 }
