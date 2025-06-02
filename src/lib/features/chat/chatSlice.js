@@ -15,8 +15,6 @@ export const sendMessage = createAsyncThunk('chat/sendMessage', async (params) =
                 }
             }
         );
-
-        console.log(response.data.events_test)
         
         return { 
             userMessage: params.message, 

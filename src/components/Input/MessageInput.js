@@ -18,8 +18,6 @@ function MessageInput () {
 
     function handleSubmit () {
         
-        console.log(session);
-
         if(status !== 'loading' && UserInput !== '')
         {
             dispatch(sendMessage({message: UserInput, previousMessages: messages, userToken: session.accessToken}));
