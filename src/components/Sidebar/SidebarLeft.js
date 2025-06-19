@@ -13,8 +13,7 @@ function SidebarLeft () {
             </div>
             <p className={styles.Credit}>By M Bleasdale, 2025</p>
             <div className={styles.Links}>
-                <a className={styles.GitHub} href="github.com/m-bleasdale/assistant">View on Github</a>
-                <a className={styles.Demo} href="github.com/m-bleasdale/assistant">See demo</a>
+                <a className={styles.GitHub} href="https://github.com/m-bleasdale/assistant/blob/main/README.md">View on Github</a>
             </div>
             <div className={styles.Text}>
                 <p>This tool is designed to take a simple free text input and update a user's events and tasks.</p>
