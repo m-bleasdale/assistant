@@ -12,16 +12,29 @@
     padding: 10px;
     border-radius: 10px;
     width: 90%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.Action h1{
+    font-size: 18px;
+}
+
+.Action h2{
+    font-size: 16px;
+    font-weight: normal;
 }
 
 .Action#add {
-    background-color: var(--calendar-blue);
+    border: 1px solid var(--calendar-blue);
 }
 .Action#modify {
-    background-color: var(--calendar-green);
+    border: 1px solid var(--calendar-green);
 }
 .Action#remove {
-    background-color: var(--calendar-red);
+    border: 1px solid var(--calendar-red);
 }
 
 .ActionTimes {

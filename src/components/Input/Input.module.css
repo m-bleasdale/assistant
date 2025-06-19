@@ -1,59 +1,63 @@
 .MessageInput {
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    padding: 0 1rem;
 }
 
 .Container {
     display: flex;
-    justify-content: center;
     flex-direction: row;
-    margin-bottom: 25px;
-
+    justify-content: center;
+    align-items: stretch;
     border: none;
     border-radius: 20px;
     background-color: var(--background-accent);
-
     box-shadow: 0 10px 15px -3px #0000001a;
-    -webkit-box-shadow: 0 10px 15px -3px #0000001a;
-    -moz-box-shadow: 0 10px 15px -3px #0000001a;
-
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+    padding: 10px;
+    flex-wrap: wrap;
 }
 
-.MessageInputContainer .Input {
+.MessageInputContainer {
+    flex: 1;
+    display: flex;
+}
+
+.Input {
     resize: none;
-    width: 750px;
+    width: 100%;
     height: 110px;
-
     padding: 15px;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     font-size: 16px;
-
     border: none;
     background: inherit;
-
+    box-sizing: border-box;
 }
 
-.MessageInputContainer .Input:focus {
+.Input:focus {
     outline: none;
 }
 
-.MessageInputContainer .Input::placeholder {
-    font-family: Arial;
+.Input::placeholder {
+    font-family: Arial, sans-serif;
 }
 
 .Buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding: 0 10px;
+    gap: 10px;
 }
 
 .MessageSubmit {
     height: 35px;
     width: 35px;
-    border-radius: 100%;
+    border-radius: 50%;
     background: var(--primary);
     color: var(--alt-text);
     cursor: pointer;
@@ -62,11 +66,12 @@
     justify-content: center;
 }
 
-.MessageSubmit#idle .MessageSubmit#succeeded .MessageSubmit#failed {
+.MessageSubmit#idle,
+.MessageSubmit#succeeded,
+.MessageSubmit#failed {
     background: var(--primary);
     color: var(--alt-text);
 }
-
 
 .MessageSubmit#loading {
     background: var(--primary-faded);
@@ -76,4 +81,41 @@
 .MessageSubmit svg {
     height: 21px;
     width: 21px;
+}
+
+@media (max-width: 768px) {
+    .Container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .Buttons {
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 10px;
+        padding: 0;
+    }
+
+    .MessageSubmit {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Input {
+        height: 90px;
+        font-size: 14px;
+    }
+
+    .Buttons {
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .MessageSubmit {
+        height: 35px;
+        width: 35px;
+    }
 }
